@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Paket & Harga Layanan Digital | Calista Service</title>
+    <meta name="description" content="Pilih paket layanan yang sesuai dengan kebutuhan bisnis Anda. Paket Harian, Mingguan, dan Bulanan dengan fitur lengkap dan dukungan profesional.">
+    <meta name="keywords" content="paket layanan digital, harga pengembangan aplikasi, paket harian, paket mingguan, paket bulanan, konsultasi gratis, layanan profesional">
+    <meta name="author" content="Calista Service">
+    <link rel="canonical" href="https://calistaservice.com/packages.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Paket & Harga Layanan Digital | Calista Service">
+    <meta property="og:description" content="Pilih paket layanan yang sesuai dengan kebutuhan bisnis Anda. Paket Harian, Mingguan, dan Bulanan dengan fitur lengkap dan dukungan profesional.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop">
+    <meta property="og:url" content="https://calistaservice.com/packages.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Paket & Harga Layanan Digital | Calista Service">
+    <meta name="twitter:description" content="Pilih paket layanan yang sesuai dengan kebutuhan bisnis Anda. Paket Harian, Mingguan, dan Bulanan dengan fitur lengkap dan dukungan profesional.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS v4 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+
+<body class="font-inter bg-gray-50" x-data="packagesPage()">
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="bg-black text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                Paket & Harga
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto text-blue-100">
+                Pilih paket yang sesuai dengan kebutuhan dan budget bisnis Anda
+            </p>
+        </div>
+    </section>
+
+    <!-- Packages Overview -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Paket Layanan Kami
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Kami menawarkan fleksibilitas dalam paket layanan untuk memenuhi berbagai kebutuhan proyek digital Anda
+                </p>
+            </div>
+
+            <!-- Package Toggle -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-gray-200 rounded-lg p-1 flex">
+                    <button @click="viewMode = 'cards'" 
+                            :class="viewMode === 'cards' ? 'bg-white text-black shadow' : 'text-gray-600'"
+                            class="px-6 py-2 rounded-md font-medium transition-all duration-200">
+                        Tampilan Kartu
+                    </button>
+                    <button @click="viewMode = 'table'" 
+                            :class="viewMode === 'table' ? 'bg-white text-black shadow' : 'text-gray-600'"
+                            class="px-6 py-2 rounded-md font-medium transition-all duration-200">
+                        Tampilan Tabel
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cards View -->
+            <div x-show="viewMode === 'cards'" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Daily Package -->
+                <div class="bg-white rounded-lg shadow-lg border border-gray-200 p-8 relative">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2" x-text="packages.daily.name"></h3>
+                        <p class="text-gray-600" x-text="packages.daily.description"></p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-3">Fitur:</h4>
+                        <ul class="space-y-2">
+                            <template x-for="feature in packages.daily.features" :key="feature">
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span x-text="feature"></span>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Cocok untuk:</h4>
+                        <p class="text-gray-600" x-text="packages.daily.useCase"></p>
+                    </div>
+                    
+                    <a href="contact.html" 
+                       class="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">
+                        <span x-text="packages.daily.cta"></span>
+                    </a>
+                </div>
+
+                <!-- Weekly Package -->
+                <div class="bg-white rounded-lg shadow-xl border-2 border-blue-500 p-8 relative transform scale-105">
+                    <!-- Popular Badge -->
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-black  text-white px-4 py-2 rounded-full text-sm font-semibold">
+                            Paling Populer
+                        </span>
+                    </div>
+                    
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2" x-text="packages.weekly.name"></h3>
+                        <p class="text-gray-600" x-text="packages.weekly.description"></p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-3">Fitur:</h4>
+                        <ul class="space-y-2">
+                            <template x-for="feature in packages.weekly.features" :key="feature">
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span x-text="feature"></span>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Cocok untuk:</h4>
+                        <p class="text-gray-600" x-text="packages.weekly.useCase"></p>
+                    </div>
+                    
+                    <a href="contact.html" 
+                       class="block w-full bg-black text-white text-center py-3 rounded-lg font-semibold hover:bg-gray-900 transition-all duration-200">
+                        <span x-text="packages.weekly.cta"></span>
+                    </a>
+                </div>
+
+                <!-- Monthly Package -->
+                <div class="bg-white rounded-lg shadow-lg border border-gray-200 p-8 relative">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2" x-text="packages.monthly.name"></h3>
+                        <p class="text-gray-600" x-text="packages.monthly.description"></p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-3">Fitur:</h4>
+                        <ul class="space-y-2">
+                            <template x-for="feature in packages.monthly.features" :key="feature">
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span x-text="feature"></span>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Cocok untuk:</h4>
+                        <p class="text-gray-600" x-text="packages.monthly.useCase"></p>
+                    </div>
+                    
+                    <a href="contact.html" 
+                       class="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">
+                        <span x-text="packages.monthly.cta"></span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table View -->
+            <div x-show="viewMode === 'table'" class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fitur</th>
+                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Paket Harian</th>
+                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Paket Mingguan</th>
+                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Paket Bulanan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <template x-for="(feature, index) in allFeatures" :key="index">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" x-text="feature.name"></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                        <span x-show="feature.daily" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            ✓
+                                        </span>
+                                        <span x-show="!feature.daily" class="text-gray-400">✗</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                        <span x-show="feature.weekly" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            ✓
+                                        </span>
+                                        <span x-show="!feature.weekly" class="text-gray-400">✗</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                        <span x-show="feature.monthly" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            ✓
+                                        </span>
+                                        <span x-show="!feature.monthly" class="text-gray-400">✗</span>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">
+                    Jaminan Kepuasan
+                </h2>
+                <p class="text-xl text-gray-600 mb-6 max-w-3xl mx-auto">
+                    Kami memberikan jaminan unlimited revisions hingga Anda puas dengan hasil kerja kami. 
+                    Setiap proyek dilengkapi dengan dokumentasi lengkap dan dukungan teknis berkelanjutan.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <div class="text-3xl font-bold text-black mb-2">30 Hari</div>
+                        <p class="text-gray-600">Garansi purna jual</p>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-black mb-2">24/7</div>
+                        <p class="text-gray-600">Dukungan teknis</p>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-black mb-2">100%</div>
+                        <p class="text-gray-600">Kepuasan klien</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Pertanyaan Umum
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Jawaban untuk pertanyaan yang sering diajukan tentang paket layanan kami
+                </p>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-4">
+                    <template x-for="(faq, index) in packageFAQs" :key="index">
+                        <div x-data="{ open: false }" class="bg-white border border-gray-200 rounded-lg">
+                            <button @click="open = !open" 
+                                    class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200">
+                                <span class="font-medium text-gray-900" x-text="faq.question"></span>
+                                <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" 
+                                     :class="open ? 'rotate-180' : ''" 
+                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div x-show="open" x-transition class="px-6 pb-4">
+                                <p class="text-gray-600" x-text="faq.answer"></p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-black text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                Siap Memilih Paket yang Tepat?
+            </h2>
+            <p class="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+                Konsultasikan kebutuhan proyek Anda dengan tim kami untuk mendapatkan rekomendasi paket yang paling sesuai
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" 
+                   class="bg-white text-black px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl">
+                    Konsultasi Gratis
+                </a>
+                <a href="portfolio.html" 
+                   class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-black transition-all duration-200">
+                    Lihat Contoh Proyek
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="data/content.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+    function packagesPage() {
+        return {
+            viewMode: 'cards',
+            packages: content.packages,
+            
+            packageFAQs: [
+                {
+                    question: "Bagaimana cara memilih paket yang tepat untuk proyek saya?",
+                    answer: "Kami menyediakan konsultasi gratis untuk membantu Anda memilih paket yang sesuai dengan kebutuhan, timeline, dan budget proyek. Tim kami akan menganalisis requirement dan memberikan rekomendasi terbaik."
+                },
+                {
+                    question: "Apakah saya bisa upgrade atau downgrade paket di tengah proyek?",
+                    answer: "Ya, kami memberikan fleksibilitas untuk mengubah paket sesuai kebutuhan proyek. Upgrade atau downgrade dapat dilakukan dengan penyesuaian biaya yang transparan dan komunikasi yang jelas."
+                },
+                {
+                    question: "Apa yang dimaksud dengan 'unlimited revisions'?",
+                    answer: "Unlimited revisions berarti Anda dapat meminta perubahan dan perbaikan tanpa batas hingga hasil akhir sesuai dengan ekspektasi. Kami berkomitmen memberikan yang terbaik untuk kepuasan klien."
+                },
+                {
+                    question: "Bagaimana sistem pembayaran untuk setiap paket?",
+                    answer: "Untuk paket harian: pembayaran penuh di awal. Paket mingguan: 50% di awal, 50% setelah selesai. Paket bulanan: 40% di awal, 40% di tengah proyek, 20% setelah selesai."
+                },
+                {
+                    question: "Apakah ada diskon untuk proyek jangka panjang?",
+                    answer: "Ya, kami memberikan diskon khusus untuk proyek yang berlangsung lebih dari 3 bulan atau untuk klien yang menggunakan multiple services. Hubungi kami untuk informasi lebih detail."
+                }
+            ],
+            
+            allFeatures: [
+                { name: "Sesi Konsultasi", daily: true, weekly: true, monthly: true },
+                { name: "Perbaikan Minor", daily: true, weekly: false, monthly: false },
+                { name: "Laporan Harian", daily: true, weekly: false, monthly: false },
+                { name: "Dukungan WhatsApp", daily: true, weekly: true, monthly: true },
+                { name: "Pengembangan Fitur", daily: false, weekly: true, monthly: true },
+                { name: "Pengujian Menyeluruh", daily: false, weekly: true, monthly: true },
+                { name: "Dokumentasi Lengkap", daily: false, weekly: true, monthly: true },
+                { name: "Revisi Unlimited", daily: false, weekly: true, monthly: true },
+                { name: "Demo & Training", daily: false, weekly: true, monthly: true },
+                { name: "Dukungan 24/7", daily: false, weekly: false, monthly: true },
+                { name: "Monitoring Otomatis", daily: false, weekly: false, monthly: true },
+                { name: "Backup Otomatis", daily: false, weekly: false, monthly: true },
+                { name: "Garansi 30 Hari", daily: false, weekly: false, monthly: true }
+            ]
+        }
+    }
+    </script>
+</body>
+</html>

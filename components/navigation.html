@@ -1,0 +1,26 @@
+<!-- Navigation Component - This is included in header.html but kept separate for modularity -->
+<div class="navigation-component" x-data="navigationComponent()">
+  <!-- Navigation items are defined in the JavaScript component -->
+</div>
+
+<script>
+function navigationComponent() {
+  return {
+    navigationItems: [
+      { name: "Beranda", href: "index.html" },
+      { name: "Layanan", href: "services.html" },
+      { name: "Paket", href: "packages.html" },
+      { name: "Portofolio", href: "portfolio.html" },
+      { name: "Bukti", href: "evidence.html" },
+      { name: "Proses", href: "workflow.html" },
+      { name: "FAQ", href: "faq.html" },
+      { name: "Kontak", href: "contact.html" }
+    ],
+    
+    isActivePage(href) {
+      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      return href === currentPage;
+    }
+  }
+}
+</script>

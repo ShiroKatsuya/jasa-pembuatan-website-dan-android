@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>FAQ - Pertanyaan Umum | Calista Service</title>
+    <meta name="description" content="Temukan jawaban untuk pertanyaan umum tentang layanan pengembangan aplikasi, harga, timeline, dan proses kerja kami. FAQ lengkap untuk membantu Anda memahami layanan kami.">
+    <meta name="keywords" content="FAQ, pertanyaan umum, layanan pengembangan, harga aplikasi, timeline proyek, proses kerja, konsultasi gratis">
+    <meta name="author" content="Calista Service">
+    <link rel="canonical" href="https://calistaservice.com/faq.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="FAQ - Pertanyaan Umum | Calista Service">
+    <meta property="og:description" content="Temukan jawaban untuk pertanyaan umum tentang layanan pengembangan aplikasi, harga, timeline, dan proses kerja kami.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop">
+    <meta property="og:url" content="https://calistaservice.com/faq.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FAQ - Pertanyaan Umum | Calista Service">
+    <meta name="twitter:description" content="Temukan jawaban untuk pertanyaan umum tentang layanan pengembangan aplikasi, harga, timeline, dan proses kerja kami.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS v4 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+
+<body class="font-inter bg-gray-50" x-data="faqPage()">
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="bg-black text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                FAQ - Pertanyaan Umum
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto text-blue-100">
+                Temukan jawaban untuk pertanyaan yang sering diajukan tentang layanan kami
+            </p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="py-8 bg-white border-b">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative">
+                <input x-model="searchQuery" 
+                       @input="filterFAQs()"
+                       type="text" 
+                       placeholder="Cari pertanyaan atau topik..."
+                       class="w-full px-6 py-4 pl-12 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </div>
+            <p class="text-sm text-gray-500 mt-2">
+                <span x-text="filteredFAQs.length"></span> dari <span x-text="faqItems.length"></span> pertanyaan ditemukan
+            </p>
+        </div>
+    </section>
+
+    <!-- FAQ Categories -->
+    <section class="py-8 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap gap-4 justify-center">
+                <button @click="activeCategory = 'all'" 
+                        :class="activeCategory === 'all' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-black'"
+                        class="px-6 py-2 rounded-full font-medium transition-all duration-200 border border-gray-200">
+                    Semua Kategori
+                </button>
+                <template x-for="category in categories" :key="category.value">
+                    <button @click="activeCategory = category.value" 
+                            :class="activeCategory === category.value ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-black'"
+                            class="px-6 py-2 rounded-full font-medium transition-all duration-200 border border-gray-200">
+                        <span x-text="category.label"></span>
+                        <span class="ml-2 text-xs bg-white bg-opacity-20 rounded-full px-2 py-1" 
+                              x-text="getCategoryCount(category.value)"></span>
+                    </button>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Items -->
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="space-y-4">
+                <template x-for="(faq, index) in filteredFAQs" :key="index">
+                    <div x-data="{ open: false }" class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                        <button @click="open = !open" 
+                                class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mr-4">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                        <span class="text-black font-semibold text-sm" x-text="getCategoryIcon(faq.category)"></span>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-gray-900 mb-1" x-text="faq.question"></h3>
+                                    <span class="inline-block bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs" x-text="getCategoryLabel(faq.category)"></span>
+                                </div>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200 flex-shrink-0 ml-4" 
+                                 :class="open ? 'rotate-180' : ''" 
+                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div x-show="open" 
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 transform scale-95"
+                             x-transition:enter-end="opacity-100 transform scale-100"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100 transform scale-100"
+                             x-transition:leave-end="opacity-0 transform scale-95"
+                             class="px-6 pb-4">
+                            <div class="ml-12">
+                                <div class="prose prose-sm max-w-none">
+                                    <p class="text-gray-700" x-text="faq.answer"></p>
+                                </div>
+                                
+                                <!-- Related Links -->
+                                <div x-show="faq.relatedLinks && faq.relatedLinks.length > 0" class="mt-4 pt-4 border-t border-gray-100">
+                                    <h4 class="text-sm font-medium text-gray-900 mb-2">Tautan Terkait:</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        <template x-for="link in faq.relatedLinks" :key="link.text">
+                                            <a :href="link.url" 
+                                               class="text-black hover:text-blue-700 text-sm underline">
+                                                <span x-text="link.text"></span>
+                                            </a>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            
+            <!-- No Results -->
+            <div x-show="filteredFAQs.length === 0" class="text-center py-12">
+                <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Tidak ada pertanyaan ditemukan</h3>
+                <p class="text-gray-600 mb-4">Coba gunakan kata kunci yang berbeda atau lihat semua kategori.</p>
+                <button @click="searchQuery = ''; activeCategory = 'all'" 
+                        class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200">
+                    Lihat Semua FAQ
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+                <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">
+                    Masih Ada Pertanyaan?
+                </h2>
+                <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Jika Anda tidak menemukan jawaban yang dicari, jangan ragu untuk menghubungi kami. Tim kami siap membantu menjawab pertanyaan Anda.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="contact.html" 
+                       class="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl">
+                        Hubungi Kami
+                    </a>
+                    <a href="https://wa.me/62xxxxxxxxx" target="_blank" rel="noopener noreferrer"
+                       class="border-2 border-green-600 text-green-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-green-600 hover:text-white transition-all duration-200">
+                        WhatsApp Langsung
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="data/content.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+    function faqPage() {
+        return {
+            faqItems: content.faq,
+            filteredFAQs: content.faq,
+            searchQuery: '',
+            activeCategory: 'all',
+            
+            categories: [
+                { value: 'general', label: 'Umum' },
+                { value: 'pricing', label: 'Harga' },
+                { value: 'timeline', label: 'Timeline' },
+                { value: 'technical', label: 'Teknis' },
+                { value: 'support', label: 'Support' }
+            ],
+            
+            filterFAQs() {
+                let filtered = this.faqItems;
+                
+                // Filter by category
+                if (this.activeCategory !== 'all') {
+                    filtered = filtered.filter(faq => faq.category === this.activeCategory);
+                }
+                
+                // Filter by search query
+                if (this.searchQuery.trim()) {
+                    const query = this.searchQuery.toLowerCase();
+                    filtered = filtered.filter(faq => 
+                        faq.question.toLowerCase().includes(query) ||
+                        faq.answer.toLowerCase().includes(query)
+                    );
+                }
+                
+                this.filteredFAQs = filtered;
+            },
+            
+            getCategoryCount(categoryValue) {
+                if (categoryValue === 'all') {
+                    return this.faqItems.length;
+                }
+                return this.faqItems.filter(faq => faq.category === categoryValue).length;
+            },
+            
+            getCategoryLabel(category) {
+                const categoryMap = {
+                    'general': 'Umum',
+                    'pricing': 'Harga',
+                    'timeline': 'Timeline',
+                    'technical': 'Teknis',
+                    'support': 'Support'
+                };
+                return categoryMap[category] || category;
+            },
+            
+            getCategoryIcon(category) {
+                const iconMap = {
+                    'general': '?',
+                    'pricing': '$',
+                    'timeline': '⏱',
+                    'technical': '⚙',
+                    'support': '🛠'
+                };
+                return iconMap[category] || '?';
+            },
+            
+            init() {
+                // Add category to each FAQ item
+                this.faqItems = this.faqItems.map(faq => ({
+                    ...faq,
+                    category: this.determineCategory(faq.question)
+                }));
+                
+                this.filterFAQs();
+            },
+            
+            determineCategory(question) {
+                const questionLower = question.toLowerCase();
+                
+                if (questionLower.includes('harga') || questionLower.includes('biaya') || questionLower.includes('pembayaran')) {
+                    return 'pricing';
+                } else if (questionLower.includes('lama') || questionLower.includes('waktu') || questionLower.includes('timeline')) {
+                    return 'timeline';
+                } else if (questionLower.includes('teknologi') || questionLower.includes('framework') || questionLower.includes('integrasi')) {
+                    return 'technical';
+                } else if (questionLower.includes('dukungan') || questionLower.includes('support') || questionLower.includes('garansi')) {
+                    return 'support';
+                } else {
+                    return 'general';
+                }
+            }
+        }
+    }
+    </script>
+</body>
+</html>
+

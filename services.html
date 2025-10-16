@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Layanan Pengembangan Aplikasi & Solusi Digital | Calista Service</title>
+    <meta name="description" content="Layanan lengkap pengembangan aplikasi web & Android, DevOps & hosting, perbaikan hardware, dan solusi AI untuk bisnis Anda. Tim profesional dengan pengalaman bertahun-tahun.">
+    <meta name="keywords" content="pengembangan aplikasi web, pengembangan aplikasi android, layanan devops, hosting profesional, perbaikan hardware, solusi ai, integrasi api, konsultasi teknologi">
+    <meta name="author" content="Calista Service">
+    <link rel="canonical" href="https://calistaservice.com/services.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Layanan Pengembangan Aplikasi & Solusi Digital | Calista Service">
+    <meta property="og:description" content="Layanan lengkap pengembangan aplikasi web & Android, DevOps & hosting, perbaikan hardware, dan solusi AI untuk bisnis Anda.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop">
+    <meta property="og:url" content="https://calistaservice.com/services.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Layanan Pengembangan Aplikasi & Solusi Digital | Calista Service">
+    <meta name="twitter:description" content="Layanan lengkap pengembangan aplikasi web & Android, DevOps & hosting, perbaikan hardware, dan solusi AI untuk bisnis Anda.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS v4 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+
+<body class="font-inter bg-gray-50" x-data="servicesPage()">
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="bg-black text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                Layanan Kami
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto text-blue-100">
+                Solusi digital komprehensif untuk semua kebutuhan bisnis Anda
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Layanan Lengkap untuk Bisnis Digital Anda
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Dari konsep hingga implementasi, kami menyediakan layanan end-to-end untuk memastikan kesuksesan digital bisnis Anda
+                </p>
+            </div>
+
+            <!-- Service Cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <template x-for="(service, index) in mainServices" :key="service.id">
+                    <div class="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
+                        <div class="flex items-start mb-6">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-black rounded-lg flex items-center justify-center">
+                                    <span class="text-2xl text-blue-100" x-text="getServiceIcon(service.id)"></span>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2" x-text="service.title"></h3>
+                                <p class="text-gray-600" x-text="service.description"></p>
+                            </div>
+                        </div>
+
+                        <!-- Sub Services -->
+                        <div class="mb-6">
+                            <h4 class="text-lg font-semibold text-gray-900 mb-4">Sub-layanan:</h4>
+                            <div class="space-y-3">
+                                <template x-for="subService in service.subServices" :key="subService.title">
+                                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h5 class="font-medium text-gray-900" x-text="subService.title"></h5>
+                                            <p class="text-sm text-gray-600" x-text="subService.description"></p>
+                                        </div>
+                                        <span class="text-sm font-medium text-black bg-blue-100 px-2 py-1 rounded" x-text="subService.timeEstimate"></span>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Tech Stack -->
+                        <div class="mb-6">
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">Teknologi:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <template x-for="tech in service.techStack" :key="tech">
+                                    <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm" x-text="tech"></span>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Guarantee -->
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-green-700 font-medium" x-text="service.guarantee"></span>
+                            </div>
+                        </div>
+
+                        <!-- CTA -->
+                        <a href="contact.html" 
+                           class="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-gray-900 transition-all duration-200">
+                            Konsultasi Layanan Ini
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Process -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Proses Kerja Layanan
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Kami mengikuti proses yang terstruktur untuk memastikan hasil terbaik untuk setiap layanan
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">📋</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">1. Konsultasi & Analisis</h3>
+                    <p class="text-gray-600">Diskusi mendalam untuk memahami kebutuhan dan tujuan bisnis Anda</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🎨</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">2. Perencanaan & Desain</h3>
+                    <p class="text-gray-600">Membuat roadmap dan desain yang sesuai dengan visi bisnis Anda</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">💻</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">3. Implementasi</h3>
+                    <p class="text-gray-600">Eksekusi dengan teknologi terdepan dan best practices industri</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🧪</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">4. Testing & Quality Assurance</h3>
+                    <p class="text-gray-600">Pengujian menyeluruh untuk memastikan kualitas dan performa optimal</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🚀</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">5. Deployment & Launch</h3>
+                    <p class="text-gray-600">Peluncuran ke lingkungan produksi dengan monitoring 24/7</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🔄</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">6. Support & Maintenance</h3>
+                    <p class="text-gray-600">Dukungan berkelanjutan dan pembaruan sesuai kebutuhan bisnis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                        Mengapa Memilih Layanan Kami?
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Tim Profesional Berpengalaman</h3>
+                                <p class="text-gray-600">Tim developer dan engineer dengan pengalaman bertahun-tahun di industri teknologi</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Teknologi Terdepan</h3>
+                                <p class="text-gray-600">Menggunakan framework dan tools terbaru untuk hasil yang optimal dan scalable</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Komunikasi Transparan</h3>
+                                <p class="text-gray-600">Update progress rutin dan komunikasi yang jelas di setiap tahap proyek</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Garansi & Support</h3>
+                                <p class="text-gray-600">Garansi 30 hari dan dukungan teknis berkelanjutan untuk semua layanan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop" 
+                         alt="Team working on digital solutions" 
+                         class="rounded-lg shadow-xl">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-black text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                Siap Mengembangkan Solusi Digital Anda?
+            </h2>
+            <p class="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+                Hubungi kami untuk konsultasi gratis dan diskusi tentang kebutuhan digital bisnis Anda
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" 
+                   class="bg-white text-black px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl">
+                    Konsultasi Gratis Sekarang
+                </a>
+                <a href="packages.html" 
+                   class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-black transition-all duration-200">
+                    Lihat Paket Layanan
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="data/content.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+    function servicesPage() {
+        return {
+            mainServices: content.services.mainServices,
+            
+            getServiceIcon(serviceId) {
+                const icons = {
+                    'web-android': '📱',
+                    'devops-hosting': '☁️',
+                    'hardware': '🔧',
+                    'ai-solutions': '🤖'
+                };
+                return icons[serviceId] || '💻';
+            }
+        }
+    }
+    </script>
+</body>
+</html>
