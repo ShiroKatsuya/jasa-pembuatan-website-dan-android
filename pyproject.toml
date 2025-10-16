@@ -1,0 +1,9 @@
+[project]
+name = "calista-service"
+version = "0.1.0"
+description = "Static site served via Python http.server on Vercel"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+
