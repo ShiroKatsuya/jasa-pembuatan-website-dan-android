@@ -564,9 +564,5 @@ const content = {
   }
 };
 
-// Export for use in HTML files
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = content;
-} else if (typeof window !== 'undefined') {
-  window.content = content;
-}
+// Make content available globally for use in HTML files
+window.content = content;
